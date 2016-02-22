@@ -1,0 +1,23 @@
+PATH
+  remote: ../../apa102_rbpi
+  specs:
+    apa102_rbpi (0.2.0)
+      pi_piper (~> 1.9)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    eventmachine (1.0.9)
+    ffi (1.9.10)
+    pi_piper (1.9.9)
+      eventmachine (= 1.0.9)
+      ffi
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  apa102_rbpi!
+
+BUNDLED WITH
+   1.11.2
