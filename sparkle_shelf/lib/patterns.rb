@@ -1,3 +1,5 @@
+# Deprecated
+
 require 'apa102_rbpi'
 
 module SparkleShelf
