@@ -1,7 +1,7 @@
 require 'apa102_rbpi'
 include Apa102Rbpi
 @strip = Apa102.new(120, {
-  brightness: 25,
+  brightness: 31,
   led_frame_rgb_offsets: {
     red: 3,
     blue: 2,
@@ -38,14 +38,14 @@ end
 
 def pulse(hz, color)
   sleep_time = 1.0/hz
-  (0..31).each do |brightness|
+  (1..31).each do |brightness|
     @strip.num_leds.times do |pos|
       @strip.set_pixel(pos, color, brightness)
     end
     @strip.show!
     sleep sleep_time
   end
-  (0..31).reverse_each do |brightness|
+  (1..31).reverse_each do |brightness|
     @strip.num_leds.times do |pos|
       @strip.set_pixel(pos, color, brightness)
     end
@@ -58,6 +58,12 @@ def pulse_loop(hz)
   loop { pulse(hz, color_wheel(rand(256))) }
 end
 
+def magic2(hz, interval = 5)
+  sleep_time = 1.0/hz
+  @strip.num_leds.times do |l|
+    @strip.set_pixel(l, color_wheel())
+  end
+end
 def magic(hz, interval = 5)
   start_idx = rand(@strip.num_leds)
   sleep_time = 1.0/hz
@@ -79,7 +85,7 @@ end
 def magic_snake(hz, length = 1, interval = 10)
   sleep_time = 1.0/hz
   @strip.num_leds.times do |offset|
-    # blank all pixels out
+    # blank all pixels out)
     @strip.num_leds.times do |dark_pixel|
       @strip.set_pixel(dark_pixel, 0)
     end
@@ -87,6 +93,7 @@ def magic_snake(hz, length = 1, interval = 10)
     (0..(length - 1)).each do |snake_pos|
       lit_pixel = (offset + snake_pos) % @strip.num_leds
       @strip.set_pixel(lit_pixel,
+                       #color_wheel(((lit_pixel * interval) % 255) + offset),
                        color_wheel(((lit_pixel * interval) & 255) + offset),
                        [(31/(length - snake_pos)),1].max)
     end
@@ -94,4 +101,26 @@ def magic_snake(hz, length = 1, interval = 10)
     sleep sleep_time
   end
 end
+loop { magic_snake(100, 55, 3) }
 
+def set_all(color, increment, brightness = 10)
+  @strip.num_leds.times do |l|
+    if l % increment == 0
+      @strip.set_pixel(l, color, brightness)
+    else
+      @strip.set_pixel(l, 0)
+    end
+  end
+  @strip.show!
+end
+
+def alternating_checkered(color1, color2)
+  @strip.num_leds.times do |dark_pixel|
+    if dark_pixel % 2 == 0
+      @strip.set_pixel(dark_pixel, color1)
+    else
+      @strip.set_pixel(dark_pixel, color2)
+    end
+  end
+  @strip.show!
+end

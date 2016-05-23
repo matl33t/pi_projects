@@ -28,4 +28,9 @@ TODO
   * ruby gem is in a working state. it may be desirable to build higher-level abstractions on top of it to control sections of non-contiguous leds.
   * setting up a webserver (i.e. rails, sinatra) will be needed for easier remote control of the lights. having an API and a mobile client is a bit of a stetch goal timewise, but straightforward to implement.
 
+### 20160507
+- Hardware state:
+  * Soldered into a proto board
+  * Mounted strips onto shelf
+
 

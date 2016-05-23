@@ -2,6 +2,7 @@ PATH
   remote: ../../apa102_rbpi
   specs:
     apa102_rbpi (0.2.0)
+      paint
       pi_piper (~> 1.9)
 
 GEM
@@ -9,6 +10,7 @@ GEM
   specs:
     eventmachine (1.0.9)
     ffi (1.9.10)
+    paint (1.0.1)
     pi_piper (1.9.9)
       eventmachine (= 1.0.9)
       ffi
